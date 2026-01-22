@@ -41,7 +41,7 @@ Maps users to tenants (supports multiple users per tenant).
 ### receipt_designs
 Stores label/receipt designs per tenant.
 
-### receipt_designs
+### receipt_elements
 stores receipt elements for receipt designs 
 
 ---

@@ -5,8 +5,8 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js";
 serve(async (req) => {
   const supabase = createClient(
     Deno.env.get("SUPABASE_URL")!,
-    Deno.env.get("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImN2eWFnZWZkY2xpbXJpendnaWlzIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTc2ODA0MzAwMSwiZXhwIjoyMDgzNjE5MDAxfQ.WsdDtSIq-EB75y59jPS6bRZKtmgaHVY6NpOgOLU998k")!
-  );
+    Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
+);
 
   /* ---------------- AUTH ---------------- */
   const authHeader = req.headers.get("Authorization");
@@ -129,3 +129,4 @@ serve(async (req) => {
     return new Response(JSON.stringify(err), { status: 400 });
   }
 });
+

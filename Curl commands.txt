@@ -1,0 +1,34 @@
+get access token(JWT token) - valid only 1 hr
+
+curl -X POST "https://cvyagefdclimrizwgiis.supabase.co/auth/v1/token?grant_type=password" 
+ -H "apikey: ANON_KEY"
+ -H "Content-Type: application/json" 
+ -d "{\"email\":\"test123@gmail.com\",\"password\":\"test@123\"}"
+
+Insert Design
+
+curl -X POST "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"tenant_id\":\"bb099da9-0a1f-49b1-b2b0-f75d30cff879\",\"name\":\" print\",\"width\":\"400\", \"height\":\"400\",}"
+
+Get Designs
+
+curl -X GET "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?select=*" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN"
+
+Update Design
+
+curl -X PATCH "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?id=eq.DESIGN_ID" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"width\":500}"
+
+Delete Design
+
+curl -X DELETE "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?id=eq.DESIGN_ID" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN"

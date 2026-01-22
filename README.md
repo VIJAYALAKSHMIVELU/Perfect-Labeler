@@ -98,6 +98,11 @@ curl -X DELETE "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?id=eq.DES
 
 ---
 ---
+##  API Testing Video
+
+https://drive.google.com/file/d/1j7qeKoysmNBW8ic8nNm8aW-qoQoBjvtH/view?usp=drive_link
+
+---
 ## 🧪 API Testing using CURL after adding edge function
 
 ### Insert Design

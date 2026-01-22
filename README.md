@@ -41,6 +41,9 @@ Maps users to tenants (supports multiple users per tenant).
 ### receipt_designs
 Stores label/receipt designs per tenant.
 
+### receipt_designs
+stores receipt elements for receipt designs 
+
 ---
 
 ## 🔐 Security Model
@@ -51,12 +54,55 @@ Stores label/receipt designs per tenant.
 - RLS policies ensure tenant-level isolation
 
 ---
+## 🧪 API Testing using CURL before adding edge function
 
-## 🧪 API Testing using CURL
+### get access token(JWT token) - valid only 1 hr
+```bash
+curl -X POST "https://cvyagefdclimrizwgiis.supabase.co/auth/v1/token?grant_type=password" 
+ -H "apikey: ANON_KEY"
+ -H "Content-Type: application/json" 
+ -d "{\"email\":\"test123@gmail.com\",\"password\":\"test@123\"}"
+ ```
 
 ### Insert Design
 ```bash
-curl -X POST "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-design" \
+curl -X POST "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"tenant_id\":\"bb099da9-0a1f-49b1-b2b0-f75d30cff879\",\"name\":\" print\",\"width\":\"400\", \"height\":\"400\",}"
+```
+
+### Get Designs
+```bash
+curl -X GET "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?select=*" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN"
+```
+
+### Update Design
+```bash
+curl -X PATCH "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?id=eq.DESIGN_ID" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{\"width\":500}"
+```
+
+### Delete Design
+```bash
+curl -X DELETE "https://PROJECT_ID.supabase.co/rest/v1/receipt_designs?id=eq.DESIGN_ID" \
+  -H "apikey: PUBLIC_ANON_KEY" \
+  -H "Authorization: Bearer USER_ACCESS_TOKEN"
+```
+
+---
+---
+## 🧪 API Testing using CURL after adding edge function
+
+### Insert Design
+```bash
+curl -X POST "https://PROJECT_ID.supabase.co/functions/v1/hyper-responder" \
   -H "apikey: PUBLIC_ANON_KEY" \
   -H "Authorization: Bearer USER_JWT" \
   -H "Content-Type: application/json" \
@@ -69,14 +115,14 @@ curl -X POST "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-design"
 
 ### Get Designs
 ```bash
-curl -X GET "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-design" \
+curl -X GET "https://PROJECT_ID.supabase.co/functions/v1/hyper-responder" \
   -H "apikey: PUBLIC_ANON_KEY" \
   -H "Authorization: Bearer USER_JWT"
 ```
 
 ### Update Design
 ```bash
-curl -X PATCH "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-design?id=DESIGN_ID" \
+curl -X PATCH "https://PROJECT_ID.supabase.co/functions/v1/hyper-responder?id=DESIGN_ID" \
   -H "apikey: PUBLIC_ANON_KEY" \
   -H "Authorization: Bearer USER_JWT" \
   -H "Content-Type: application/json" \
@@ -85,7 +131,7 @@ curl -X PATCH "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-design
 
 ### Delete Design
 ```bash
-curl -X DELETE "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-design?id=DESIGN_ID" \
+curl -X DELETE "https://PROJECT_ID.supabase.co/functions/v1/hyper-responder?id=DESIGN_ID" \
   -H "apikey: PUBLIC_ANON_KEY" \
   -H "Authorization: Bearer USER_JWT"
 ```
@@ -109,15 +155,7 @@ curl -X DELETE "https://PROJECT_ID.supabase.co/functions/v1/insert-receipt-desig
 
 ---
 
-## 📄 Submission Notes
-
-- Industry-standard SaaS architecture
-- Secure and scalable
-- Suitable for internships and interviews
-
----
-
 ## 👩‍💻 Author
 
 Vijayalakshmi  
-B.Tech IT  
+ 
